@@ -3,7 +3,7 @@ import numpy as np
 import cv2
 
 
-input_folder = "npz_images"
+input_folder = "scans-20250225T092603Z-001/scans/34244ba6-8026-11ef-be7d-37d1ef72a9cf/104"
 output_folder = "rgb_images"
 
 os.makedirs(output_folder, exist_ok=True)
