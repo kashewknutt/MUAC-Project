@@ -5,6 +5,11 @@ from segment_anything import sam_model_registry, SamPredictor
 import matplotlib.pyplot as plt
 from typing import Tuple, Optional
 
+
+
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+
 class MUACProcessor:
     def __init__(self, model_path: str, model_type: str = "vit_h"):
         self.sam = sam_model_registry[model_type](checkpoint=model_path)
