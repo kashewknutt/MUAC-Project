@@ -12,7 +12,15 @@ os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 class MUACProcessor:
     def __init__(self, model_path: str, model_type: str = "vit_h"):
+        import torch
         self.sam = sam_model_registry[model_type](checkpoint=model_path)
+        
+        # Move model to CUDA for GPU acceleration
+        if torch.cuda.is_available():
+            self.sam = self.sam.to(device="cuda")
+        else:
+            print("WARNING: CUDA not available. Running on CPU, which will be significantly slower.")
+        
         self.predictor = SamPredictor(self.sam)
         
     def load_image(self, image_path: str) -> Tuple[np.ndarray, Image.Image]:
@@ -99,11 +107,16 @@ class MUACProcessor:
         plt.show()
 
 def main():
+    import torch
+    print(f"CUDA available: {torch.cuda.is_available()}")
+    print(f"CUDA device count: {torch.cuda.device_count()}")
+    print(f"CUDA device name: {torch.cuda.get_device_name(0)}")
+    
     # Initialize processor
     processor = MUACProcessor(model_path="model/sam_vit_h_4b8939.pth")
     
     # Process image
-    image_path = "rgb_images/images_8a3dffb0-8020-11ef-8cc5-7726412f20a6_100_1.png"
+    image_path = "rgb_images/images_342761ce-8026-11ef-be7f-6bffe21c74a1_102_1.png"
     segmented, preprocessed = processor.process_image(
         image_path, 
         save_path="output/result"
