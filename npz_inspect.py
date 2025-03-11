@@ -3,7 +3,7 @@ import cv2
 import matplotlib.pyplot as plt
 
 # Load the .npz file
-file_path = "scans-20250225T092603Z-001/scans/97dd75ea-802c-11ef-bf64-5f13ab67fa6e/100/images_9910ff4a-802c-11ef-bff1-d3a1778ed42e_100_1.npz"  # Replace with your actual file path
+file_path = "scans-20250225T092603Z-001/scans/97dd75ea-802c-11ef-bf64-5f13ab67fa6e/100/images_9910ff4a-802c-11ef-bff1-d3a1778ed42e_100_1.npz"
 data = np.load(file_path)
 
 # Function to display images properly
